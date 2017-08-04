@@ -1,4 +1,5 @@
 import React from 'react';
+import './app.css';
 
 class App extends React.Component {
     state = {
@@ -9,6 +10,7 @@ class App extends React.Component {
             weatherCode: '',
             windSpeed: 0,
             clouds:'',
+            description: '',
             fetching: true
         };
 
@@ -23,12 +25,14 @@ class App extends React.Component {
         const appId = '572ad254a022b963852f0621c1e5fdeb';
         const query = `units=metric&lang=ru&appid=${appId}`;
 
+        let dubDate = new Date();
+
         fetch(`${baseUrl}${path}?q=${city},IE&${query}`)
             .then(response => response.json() )
             .then(data => {
                 console.log(data);
-                const date = new Date();
-                const time = date.getHours();
+                const date = dubDate;
+                const time = dubDate.getUTCHours()+1;
 
                 this.setState({
                     time,
@@ -37,6 +41,7 @@ class App extends React.Component {
                     weatherCode: data.weather[0].id,
                     windSpeed: data.wind.speed,
                     clouds: data.clouds.all,
+                    description: data.weather[0].description,
                     fetching: false
                 }, () => {console.log(this.state)})
             })
@@ -52,15 +57,22 @@ class App extends React.Component {
                 windSpeed,
                 clouds,
                 temperature,
-                weatherCode } = this.state;
+                weatherCode,
+                description} = this.state;
 
         return fetching ?
-            <h1>loading1</h1>
+            <div className="weather-informer">
+                <h1>Loading..</h1>
+            </div>
             :
-            <div>
-                <h1>Dublin {temperature}&deg;C </h1>
-               Ветер: {Math.floor(windSpeed)} м/с<br/>
-                Облачность: {clouds}%
+            <div className="weather-informer" data-hour={time}>
+                <div className="weather-informer__info">
+                    <h1 className="weather-informer__header">Dublin  </h1>
+                    <span className="weather-informer__temperature">{temperature}&deg;C</span><br/>
+                    {description}<br/>
+                    Ветер: {Math.floor(windSpeed)} м/с<br/>
+                    Облачность: {clouds}%
+                </div>
             </div>
     }
 

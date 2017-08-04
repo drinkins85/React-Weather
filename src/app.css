@@ -1,0 +1,52 @@
+.weather-informer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: ghostwhite;
+    transition: all ease 1s;
+    background-image: url('img/dub_day.jpg');
+    background-size: cover;
+}
+
+.weather-informer__info {
+    background-color: antiquewhite;
+    color: darkblue;
+    padding: 20px;
+    display: block;
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.weather-informer__temperature {
+    font-size: 1.2em;
+    display: inline-block;
+    background-color: bisque;
+    padding: 5px;
+}
+
+.weather-informer__header {
+    margin-top: 10px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.weather-informer[data-hour='0'],
+.weather-informer[data-hour='1'],
+.weather-informer[data-hour='2'],
+.weather-informer[data-hour='3'],
+.weather-informer[data-hour='4'],
+.weather-informer[data-hour='5'],
+.weather-informer[data-hour='6'] {
+    background-color: #362942;
+    background-image: url('img/dub_night.jpg');
+    background-size: cover;
+}
+
+

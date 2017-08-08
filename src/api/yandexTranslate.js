@@ -1,5 +1,6 @@
 export default function translate(lang){
 
+    //let cities = this.state.lang.cities.join('|');
     let text = `${this.state.lang.cloudsLabelEng}|${this.state.lang.windLabelEng}`;
     const translateApiUrl = 'https://translate.yandex.net/api/v1.5/tr.json/translate';
     const translateApiKey = 'trnsl.1.1.20170807T090216Z.f817b5ad504efad1.341d8f539d4785791f8952a142540ed3e0e102c0';
@@ -11,7 +12,6 @@ export default function translate(lang){
         .then(response => response.json() )
         .then(data => {
             let translated = data.text[0].split('|');
-            //console.log(translated);
             this.setState({
                 lang: {
                     langCode: lang,
